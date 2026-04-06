@@ -1,52 +1,97 @@
 .favorites {
-  padding: 2rem;
+  padding: 2rem 0.5rem;
   width: 100%;
-  box-sizing: border-box;
 }
 
-.favorites h2 {
-  margin-bottom: 2rem;
+.favorites > h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
   text-align: center;
-  font-size: 2.5rem;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2.5rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
+.favorites > h2::before,
+.favorites > h2::after {
+  content: '';
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-active));
+}
+
+.favorites > h2::after {
+  background: linear-gradient(to left, transparent, var(--border-active));
+}
+
+/* ── Empty state ── */
 .favorites-empty {
   text-align: center;
-  padding: 4rem 2rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-surface) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   margin: 2rem auto;
-  max-width: 600px;
+  max-width: 520px;
+  position: relative;
+  overflow: hidden;
+}
+
+.favorites-empty::before {
+  content: '♥';
+  position: absolute;
+  font-size: 12rem;
+  font-weight: 900;
+  color: rgba(232, 23, 58, 0.04);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  line-height: 1;
 }
 
 .favorites-empty h2 {
+  font-family: 'Playfair Display', Georgia, serif;
   margin-bottom: 1rem;
-  font-size: 2rem;
-  color: #e50914;
+  font-size: 1.8rem;
+  color: var(--accent);
+  position: relative;
 }
 
 .favorites-empty p {
-  color: #999;
-  font-size: 1.2rem;
-  line-height: 1.6;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 340px;
+  margin: 0 auto;
+  position: relative;
 }
 
-
-/* Animation for new favorites being added */
-@keyframes fadeIn {
+/* ── Grid animation ── */
+@keyframes fadeSlideIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(24px) scale(0.97);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 .movies-grid > * {
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.movies-grid > *:nth-child(2) { animation-delay: 0.05s; }
+.movies-grid > *:nth-child(3) { animation-delay: 0.10s; }
+.movies-grid > *:nth-child(4) { animation-delay: 0.15s; }
+.movies-grid > *:nth-child(5) { animation-delay: 0.20s; }
+.movies-grid > *:nth-child(6) { animation-delay: 0.25s; }
